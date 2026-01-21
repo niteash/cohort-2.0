@@ -1,0 +1,79 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+#main {
+  background-image: url("https://www.eap-magazin.de/medium/230725-Heinz-Nixdorf.jpg?m=25230&w=1200&h=800&g=0");
+  background-position: center;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@font-face {
+  font-family: ai;
+  src: url("./fonts/Raleway-VariableFont_wght.ttf");
+}
+
+h1 {
+  font-size: 8vw;
+  padding: 80px;
+  font-family: ai;
+  font-weight: 900;
+  color: rgb(255, 255, 255);
+  text-transform: uppercase;
+}
+
+button {
+  background: linear-gradient(
+    to right top,
+    rgb(237, 237, 237) 30%,
+    rgb(255, 255, 255) 70%
+  );
+  border: none;
+  padding: 20px 60px;
+  color: rgb(12, 12, 12);
+  border-radius: 40px;
+}
+
+#box-main {
+  width: 400px;
+  height: 400px;
+  background-color: blue;
+  position: relative;
+}
+
+.child-relative {
+  width: 200px;
+  height: 200px;
+  background-color: rgb(0, 255, 34);
+  position: absolute;
+  top: 50%;
+}
+
+.inner-box {
+  width: 100px;
+  height: 100px;
+  background-color: rgb(246, 246, 0);
+  position: absolute;
+  left: 50%;
+}
+
+.small-box {
+  width: 50px;
+  height: 50px;
+  background-color: rgb(246, 0, 0);
+  position: absolute;
+  left: 50%;
+}

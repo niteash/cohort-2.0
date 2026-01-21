@@ -1,0 +1,41 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+h1 {
+  color: blue;
+  padding: 2rem 5rem;
+  border: 2px solid red;
+}
+
+main {
+  width: 100%;
+  height: 100%;
+  background-color: aqua;
+  padding: 20rem;
+}
+main section {
+  width: 30vw;
+  height: 30vh;
+  background-color: bisque;
+  padding: 2rem;
+}
+
+.btn1 {
+  padding: 4px 6px;
+  color: rgb(255, 255, 255);
+  background-color: red;
+}
+
+.btn2 {
+  padding: 4px 6px;
+  color: rgb(255, 255, 255);
+  background-color: blue;
+}/*# sourceMappingURL=app.css.map */

@@ -1,0 +1,20 @@
+#Absolute unit (Fixed values)
+
+-px (pixels)
+-pt (points)
+-cm (centimetre)
+-mm (millimetre)
+-in (inches)
+
+#relatives unit (these scales based on viewport/ something)
+
+- rem
+- em
+- vh
+- vw 
+- %
+
+vw => viewport width 
+vh => viewport height 
+
+100vw = full viewport width 
