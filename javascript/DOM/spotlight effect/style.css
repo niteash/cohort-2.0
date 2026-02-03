@@ -27,6 +27,6 @@ body {
   background: radial-gradient(
     150px at var(--x) var(--y),
     rgba(255, 255, 255, 0),
-    rgba(12, 12, 12, 0.912)
+    rgba(12, 12, 12, 0.962)
   );
 }

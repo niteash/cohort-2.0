@@ -17,7 +17,7 @@ p.addEventListener("mouseenter", () => {
       .join("");
 
     p.innerText = newstr;
-    iteration += 0.1;
+    iteration += 0.25;
   }
 
   setInterval(randomText, 20);
