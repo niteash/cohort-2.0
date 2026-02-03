@@ -47,31 +47,32 @@
 
     h1,
     p {
-      transition: color 0.3s ease;
+      transition: color 0.3s linear;
     }
 
     .box {
       padding: 1rem;
-      max-width: 300px;
+      max-width: 350px;
       padding-inline: 10px;
       padding-bottom: 10px;
       display: flex;
       flex-direction: column;
       gap: 10px;
-      /* box-shadow: 0 0 50px rgb(234, 255, 0); */
+      box-shadow: 0 0 0px rgb(234, 255, 0);
       border-radius: 15px;
-      transition: transform 0.3s ease;
-      border: 5px solid rgba(255, 255, 255, 0);
+      transition: transform 0.3s linear;
+      border: 0px solid rgba(255, 255, 255, 0);
       margin: 10px;
     }
 
     .box:hover h1,
     .box:hover p {
       color: rgb(234, 255, 0);
+      text-shadow: 0 0 10px rgb(234, 255, 0);
     }
 
     .box:hover {
-      animation: spin 10s infinite;
+      animation: spin 5s infinite linear;
       transform: scale(1.1);
       background:
         linear-gradient(black) padding-box,
@@ -83,6 +84,8 @@
           )
           border-box;
       color: rgb(234, 255, 0);
+      border: 3px solid rgba(255, 255, 255, 0);
+      box-shadow: 0 0 10px rgb(234, 255, 0);
     }
 
     .box img {
