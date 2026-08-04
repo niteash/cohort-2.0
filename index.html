@@ -1,0 +1,1917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cherry Store - Premium Wholesale Sarees & Indian Fashion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        :root {
+            --cherry-red: #C1121F; --cherry-dark: #8B0A1E; --cherry-light: #E8A0A6;
+            --soft-gold: #D4AF37; --light-gold: #F4E8C1; --white: #FFFFFF;
+            --off-white: #FAFAFA; --cream: #F5F0EB; --light-gray: #F8F8F8;
+            --text-dark: #1A1A1A; --text-gray: #666666; --text-light: #999999;
+            --glass-bg: rgba(255,255,255,0.85); --glass-border: rgba(255,255,255,0.3);
+            --shadow-soft: 0 4px 20px rgba(0,0,0,0.08); --shadow-medium: 0 8px 30px rgba(0,0,0,0.12); --shadow-strong: 0 12px 40px rgba(0,0,0,0.15);
+            --radius-sm: 8px; --radius-md: 16px; --radius-lg: 24px; --radius-xl: 32px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; color: var(--text-dark); background: var(--white); overflow-x: hidden; line-height: 1.6; }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 600; }
+        ::-webkit-scrollbar { width: 8px; } ::-webkit-scrollbar-track { background: var(--light-gray); } ::-webkit-scrollbar-thumb { background: var(--cherry-red); border-radius: 4px; }
+
+        .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 1rem 0; transition: all 0.4s cubic-bezier(0.4,0,0.2,1); background: transparent; }
+        .navbar.scrolled { background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); padding: 0.75rem 0; box-shadow: var(--shadow-soft); }
+        .nav-container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; }
+        .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+        .logo-icon { width: 45px; height: 45px; background: var(--cherry-red); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; position: relative; overflow: hidden; }
+        .logo-icon::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent); animation: shimmer 3s infinite; }
+        @keyframes shimmer { 0% { transform: translateX(-100%) rotate(45deg); } 100% { transform: translateX(100%) rotate(45deg); } }
+        .logo-text { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--white); transition: color 0.3s; }
+        .navbar.scrolled .logo-text { color: var(--text-dark); }
+        .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--white); font-size: 0.9rem; font-weight: 500; letter-spacing: 0.5px; position: relative; transition: color 0.3s; padding: 0.5rem 0; }
+        .navbar.scrolled .nav-links a { color: var(--text-dark); }
+        .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--cherry-red); transition: width 0.3s cubic-bezier(0.4,0,0.2,1); }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-actions { display: flex; align-items: center; gap: 1.5rem; }
+        .nav-btn { background: none; border: none; color: var(--white); font-size: 1.1rem; cursor: pointer; position: relative; transition: color 0.3s; padding: 0.5rem; }
+        .navbar.scrolled .nav-btn { color: var(--text-dark); }
+        .nav-btn:hover { color: var(--cherry-red); }
+        .cart-count { position: absolute; top: -5px; right: -5px; background: var(--cherry-red); color: white; font-size: 0.65rem; font-weight: 700; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .btn-primary { background: var(--cherry-red); color: white; border: none; padding: 0.75rem 1.75rem; border-radius: 50px; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: all 0.3s cubic-bezier(0.4,0,0.2,1); display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; }
+        .btn-primary:hover { background: var(--cherry-dark); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(193,18,31,0.3); }
+        .btn-outline { background: transparent; color: var(--white); border: 2px solid var(--white); padding: 0.75rem 1.75rem; border-radius: 50px; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: all 0.3s; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; }
+        .btn-outline:hover { background: var(--white); color: var(--cherry-red); }
+        .navbar.scrolled .btn-outline { color: var(--cherry-red); border-color: var(--cherry-red); }
+        .navbar.scrolled .btn-outline:hover { background: var(--cherry-red); color: white; }
+        .mobile-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 0.5rem; }
+        .mobile-toggle span { width: 25px; height: 2px; background: var(--white); transition: all 0.3s; border-radius: 2px; }
+        .navbar.scrolled .mobile-toggle span { background: var(--text-dark); }
+
+        .hero { min-height: 100vh; position: relative; display: flex; align-items: center; overflow: hidden; background: linear-gradient(135deg, #1a0505 0%, #3d0a0a 50%, #1a0505 100%); }
+        .hero-bg { position: absolute; inset: 0; overflow: hidden; }
+        .hero-bg::before { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='rgba(212,175,55,0.05)' stroke-width='0.5'/%3E%3Ccircle cx='50' cy='50' r='30' fill='none' stroke='rgba(212,175,55,0.03)' stroke-width='0.5'/%3E%3Ccircle cx='50' cy='50' r='20' fill='none' stroke='rgba(212,175,55,0.02)' stroke-width='0.5'/%3E%3C/svg%3E"); background-size: 300px; opacity: 0.5; animation: float 20s linear infinite; }
+        @keyframes float { 0% { transform: translateY(0) rotate(0deg); } 100% { transform: translateY(-50px) rotate(5deg); } }
+        .hero-images { position: absolute; right: 0; top: 0; bottom: 0; width: 55%; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding: 2rem; opacity: 0.6; }
+        .hero-img { border-radius: var(--radius-lg); overflow: hidden; position: relative; }
+        .hero-img:nth-child(1) { margin-top: 10%; } .hero-img:nth-child(2) { margin-top: 5%; } .hero-img:nth-child(3) { margin-top: -5%; } .hero-img:nth-child(4) { margin-top: 0%; }
+        .hero-img img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.8) saturate(1.1); }
+        .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to right, #1a0505 30%, transparent 100%); z-index: 2; }
+        .hero-content { position: relative; z-index: 3; max-width: 1400px; margin: 0 auto; padding: 0 2rem; width: 100%; padding-top: 100px; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(212,175,55,0.15); border: 1px solid rgba(212,175,55,0.3); color: var(--soft-gold); padding: 0.5rem 1rem; border-radius: 50px; font-size: 0.85rem; font-weight: 500; margin-bottom: 2rem; backdrop-filter: blur(10px); }
+        .hero h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); color: var(--white); line-height: 1.1; margin-bottom: 1.5rem; max-width: 600px; }
+        .hero h1 .highlight { color: var(--soft-gold); position: relative; }
+        .hero-subtitle { font-size: 1.15rem; color: rgba(255,255,255,0.7); max-width: 500px; margin-bottom: 2.5rem; line-height: 1.7; }
+        .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .hero-stats { display: flex; gap: 3rem; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); }
+        .stat-item h3 { font-size: 2rem; color: var(--soft-gold); font-family: 'Playfair Display', serif; }
+        .stat-item p { font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-top: 0.25rem; }
+
+        section { padding: 6rem 0; position: relative; }
+        .section-header { text-align: center; max-width: 600px; margin: 0 auto 4rem; }
+        .section-label { display: inline-block; color: var(--cherry-red); font-size: 0.85rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1rem; }
+        .section-title { font-size: clamp(2rem, 4vw, 3rem); color: var(--text-dark); margin-bottom: 1rem; line-height: 1.2; }
+        .section-subtitle { color: var(--text-gray); font-size: 1.1rem; }
+
+        .categories { background: var(--off-white); }
+        .category-grid { max-width: 1400px; margin: 0 auto; padding: 0 2rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+        .category-card { position: relative; border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 3/4; cursor: pointer; box-shadow: var(--shadow-soft); transition: all 0.4s cubic-bezier(0.4,0,0.2,1); }
+        .category-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-strong); }
+        .category-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
+        .category-card:hover img { transform: scale(1.1); }
+        .category-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%); display: flex; flex-direction: column; justify-content: flex-end; padding: 2rem; transition: all 0.4s; }
+        .category-card:hover .category-overlay { background: linear-gradient(to top, rgba(193,18,31,0.9) 0%, rgba(193,18,31,0.3) 100%); }
+        .category-name { color: white; font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .category-count { color: rgba(255,255,255,0.8); font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem; opacity: 0; transform: translateY(10px); transition: all 0.3s; }
+        .category-card:hover .category-count { opacity: 1; transform: translateY(0); }
+
+        .products { background: var(--white); }
+        .product-grid { max-width: 1400px; margin: 0 auto; padding: 0 2rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+        .product-card { background: var(--white); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-soft); transition: all 0.4s cubic-bezier(0.4,0,0.2,1); position: relative; border: 1px solid rgba(0,0,0,0.05); }
+        .product-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-strong); }
+        .product-image { position: relative; aspect-ratio: 3/4; overflow: hidden; background: var(--light-gray); }
+        .product-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
+        .product-card:hover .product-image img { transform: scale(1.08); }
+        .product-badge { position: absolute; top: 1rem; left: 1rem; background: var(--cherry-red); color: white; padding: 0.35rem 0.75rem; border-radius: 50px; font-size: 0.75rem; font-weight: 600; z-index: 2; }
+        .product-actions { position: absolute; top: 1rem; right: 1rem; display: flex; flex-direction: column; gap: 0.5rem; opacity: 0; transform: translateX(10px); transition: all 0.3s; }
+        .product-card:hover .product-actions { opacity: 1; transform: translateX(0); }
+        .action-btn { width: 40px; height: 40px; border-radius: 50%; background: white; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: var(--shadow-soft); transition: all 0.3s; color: var(--text-dark); }
+        .action-btn:hover { background: var(--cherry-red); color: white; transform: scale(1.1); }
+        .product-info { padding: 1.5rem; }
+        .product-name { font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--text-dark); }
+        .product-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .price-group { display: flex; align-items: center; gap: 0.75rem; }
+        .wholesale-price { font-size: 1.25rem; font-weight: 700; color: var(--cherry-red); }
+        .retail-price { font-size: 0.9rem; color: var(--text-light); text-decoration: line-through; }
+        .stock-status { font-size: 0.8rem; color: #22c55e; font-weight: 500; display: flex; align-items: center; gap: 0.25rem; }
+        .stock-status.low { color: #f59e0b; }
+        .add-to-cart { width: 100%; padding: 0.875rem; background: var(--cherry-red); color: white; border: none; border-radius: var(--radius-sm); font-weight: 600; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
+        .add-to-cart:hover { background: var(--cherry-dark); transform: translateY(-2px); box-shadow: 0 4px 15px rgba(193,18,31,0.3); }
+
+        .wholesale { background: linear-gradient(135deg, #fdf2f2 0%, #fff5f5 50%, #fdf2f2 100%); position: relative; overflow: hidden; }
+        .wholesale::before { content: ''; position: absolute; top: -50%; right: -20%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(193,18,31,0.05) 0%, transparent 70%); border-radius: 50%; }
+        .wholesale-container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .wholesale-content h2 { font-size: clamp(2rem, 3vw, 2.5rem); margin-bottom: 1.5rem; }
+        .wholesale-content p { color: var(--text-gray); margin-bottom: 2rem; font-size: 1.1rem; line-height: 1.7; }
+        .benefits-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2.5rem; }
+        .benefit-card { background: var(--white); padding: 1.5rem; border-radius: var(--radius-md); box-shadow: var(--shadow-soft); border: 1px solid rgba(0,0,0,0.05); transition: all 0.3s; }
+        .benefit-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-medium); border-color: rgba(193,18,31,0.2); }
+        .benefit-icon { width: 50px; height: 50px; background: linear-gradient(135deg, var(--cherry-red), var(--cherry-dark)); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; margin-bottom: 1rem; }
+        .benefit-card h4 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .benefit-card p { font-size: 0.9rem; margin: 0; color: var(--text-gray); }
+        .wholesale-form { background: var(--white); padding: 2.5rem; border-radius: var(--radius-xl); box-shadow: var(--shadow-strong); border: 1px solid rgba(0,0,0,0.05); }
+        .form-title { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .form-subtitle { color: var(--text-gray); margin-bottom: 2rem; font-size: 0.95rem; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .form-group { margin-bottom: 1rem; }
+        .form-group.full { grid-column: 1 / -1; }
+        .form-group label { display: block; font-size: 0.85rem; font-weight: 500; margin-bottom: 0.5rem; color: var(--text-dark); }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 0.875rem 1rem; border: 2px solid #e5e5e5; border-radius: var(--radius-sm); font-family: 'Inter', sans-serif; font-size: 0.95rem; transition: all 0.3s; background: var(--white); }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--cherry-red); box-shadow: 0 0 0 4px rgba(193,18,31,0.1); }
+        .form-group textarea { resize: vertical; min-height: 100px; }
+        .submit-btn { width: 100%; padding: 1rem; background: var(--cherry-red); color: white; border: none; border-radius: var(--radius-sm); font-weight: 600; font-size: 1rem; cursor: pointer; transition: all 0.3s; margin-top: 1rem; }
+        .submit-btn:hover { background: var(--cherry-dark); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(193,18,31,0.3); }
+
+        .features { background: var(--white); }
+        .features-grid { max-width: 1400px; margin: 0 auto; padding: 0 2rem; display: grid; grid-template-columns: repeat(5, 1fr); gap: 2rem; }
+        .feature-item { text-align: center; padding: 2rem 1.5rem; border-radius: var(--radius-lg); background: var(--off-white); transition: all 0.4s; border: 1px solid transparent; }
+        .feature-item:hover { background: var(--white); border-color: rgba(193,18,31,0.2); box-shadow: var(--shadow-medium); transform: translateY(-5px); }
+        .feature-icon { width: 70px; height: 70px; background: linear-gradient(135deg, var(--cherry-red), var(--cherry-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; color: white; font-size: 1.5rem; position: relative; }
+        .feature-icon::after { content: ''; position: absolute; inset: -5px; border: 2px solid rgba(193,18,31,0.2); border-radius: 50%; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.1); opacity: 0.5; } }
+        .feature-item h4 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .feature-item p { font-size: 0.9rem; color: var(--text-gray); line-height: 1.5; }
+
+        .testimonials { background: linear-gradient(180deg, var(--white) 0%, var(--off-white) 100%); }
+        .testimonials-grid { max-width: 1400px; margin: 0 auto; padding: 0 2rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .testimonial-card { background: var(--white); padding: 2.5rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-soft); position: relative; border: 1px solid rgba(0,0,0,0.05); transition: all 0.4s; }
+        .testimonial-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-strong); }
+        .quote-icon { font-size: 3rem; color: var(--cherry-red); opacity: 0.2; line-height: 1; margin-bottom: 1rem; }
+        .testimonial-text { font-size: 1rem; color: var(--text-gray); line-height: 1.7; margin-bottom: 2rem; font-style: italic; }
+        .testimonial-author { display: flex; align-items: center; gap: 1rem; }
+        .author-avatar { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 3px solid var(--cherry-red); }
+        .author-info h5 { font-size: 1rem; margin-bottom: 0.25rem; }
+        .author-info p { font-size: 0.85rem; color: var(--text-light); }
+        .stars { color: var(--soft-gold); margin-bottom: 1rem; font-size: 0.9rem; }
+
+        .gallery { background: var(--white); padding: 0; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 300px; gap: 0.5rem; max-width: 1400px; margin: 0 auto; padding: 0 0.5rem; }
+        .gallery-item { position: relative; overflow: hidden; border-radius: var(--radius-md); cursor: pointer; grid-row: span 1; }
+        .gallery-item.tall { grid-row: span 2; } .gallery-item.wide { grid-column: span 2; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
+        .gallery-item:hover img { transform: scale(1.1); }
+        .gallery-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(193,18,31,0.8) 0%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 2rem; opacity: 0; transition: all 0.4s; }
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+        .gallery-overlay h4 { color: white; font-size: 1.25rem; margin-bottom: 0.5rem; }
+        .gallery-overlay p { color: rgba(255,255,255,0.8); font-size: 0.9rem; }
+
+        .about { background: linear-gradient(135deg, var(--off-white) 0%, var(--cream) 100%); position: relative; overflow: hidden; }
+        .about::before { content: ''; position: absolute; right: 0; top: 0; width: 40%; height: 100%; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M20,20 Q40,5 60,20 T100,20' fill='none' stroke='rgba(193,18,31,0.03)' stroke-width='2'/%3E%3Cpath d='M20,50 Q40,35 60,50 T100,50' fill='none' stroke='rgba(193,18,31,0.03)' stroke-width='2'/%3E%3Cpath d='M20,80 Q40,65 60,80 T100,80' fill='none' stroke='rgba(193,18,31,0.03)' stroke-width='2'/%3E%3C/svg%3E"); background-size: 200px; opacity: 0.5; }
+        .about-container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .about-images { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .about-img-main { grid-row: span 2; border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-strong); }
+        .about-img-sub { border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-medium); }
+        .about-img-main img, .about-img-sub img { width: 100%; height: 100%; object-fit: cover; }
+        .experience-badge { position: absolute; bottom: 2rem; right: -1rem; background: var(--cherry-red); color: white; padding: 1.5rem 2rem; border-radius: var(--radius-lg); text-align: center; box-shadow: var(--shadow-strong); z-index: 2; }
+        .experience-badge .years { font-size: 2.5rem; font-weight: 700; font-family: 'Playfair Display', serif; line-height: 1; }
+        .experience-badge .text { font-size: 0.85rem; opacity: 0.9; }
+        .about-content h2 { font-size: clamp(2rem, 3vw, 2.5rem); margin-bottom: 1.5rem; }
+        .about-content p { color: var(--text-gray); margin-bottom: 1.5rem; line-height: 1.8; }
+        .timeline { margin-top: 2rem; padding-left: 1.5rem; border-left: 2px solid var(--cherry-red); }
+        .timeline-item { position: relative; padding-bottom: 1.5rem; padding-left: 1.5rem; }
+        .timeline-item::before { content: ''; position: absolute; left: -1.6rem; top: 0.5rem; width: 12px; height: 12px; background: var(--cherry-red); border-radius: 50%; border: 3px solid var(--white); box-shadow: 0 0 0 3px var(--cherry-red); }
+        .timeline-year { font-weight: 700; color: var(--cherry-red); font-size: 0.9rem; }
+        .timeline-text { color: var(--text-gray); font-size: 0.95rem; margin-top: 0.25rem; }
+
+        .contact { background: var(--white); }
+        .contact-container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+        .contact-info h2 { font-size: clamp(2rem, 3vw, 2.5rem); margin-bottom: 1.5rem; }
+        .contact-info > p { color: var(--text-gray); margin-bottom: 2rem; line-height: 1.7; }
+        .contact-details { display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 2rem; }
+        .contact-item { display: flex; align-items: flex-start; gap: 1rem; }
+        .contact-icon { width: 50px; height: 50px; background: linear-gradient(135deg, var(--cherry-red), var(--cherry-dark)); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; flex-shrink: 0; }
+        .contact-item div h4 { font-size: 1.1rem; margin-bottom: 0.25rem; }
+        .contact-item div p { color: var(--text-gray); font-size: 0.95rem; }
+        .map-container { background: var(--light-gray); border-radius: var(--radius-xl); overflow: hidden; height: 300px; position: relative; }
+        .map-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #f5f5f5, #e5e5e5); color: var(--text-light); font-size: 1.1rem; }
+        .contact-form-wrapper { background: var(--off-white); padding: 2.5rem; border-radius: var(--radius-xl); border: 1px solid rgba(0,0,0,0.05); }
+        .social-links { display: flex; gap: 1rem; margin-top: 2rem; }
+        .social-link { width: 45px; height: 45px; border-radius: 50%; background: var(--white); border: 2px solid #e5e5e5; display: flex; align-items: center; justify-content: center; color: var(--text-dark); text-decoration: none; transition: all 0.3s; font-size: 1.1rem; }
+        .social-link:hover { background: var(--cherry-red); border-color: var(--cherry-red); color: white; transform: translateY(-3px); }
+
+        .footer { background: var(--text-dark); color: var(--white); padding: 5rem 0 2rem; position: relative; overflow: hidden; }
+        .footer::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--cherry-red), var(--soft-gold), var(--cherry-red)); }
+        .footer-container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr; gap: 3rem; margin-bottom: 3rem; }
+        .footer-brand h3 { font-family: 'Playfair Display', serif; font-size: 1.75rem; margin-bottom: 1rem; color: var(--white); }
+        .footer-brand p { color: rgba(255,255,255,0.6); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.5rem; }
+        .footer-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 1.5rem; color: var(--soft-gold); }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 0.75rem; }
+        .footer-links a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.95rem; transition: all 0.3s; display: inline-flex; align-items: center; gap: 0.5rem; }
+        .footer-links a:hover { color: var(--soft-gold); transform: translateX(5px); }
+        .newsletter-form { display: flex; gap: 0.5rem; margin-top: 1rem; }
+        .newsletter-form input { flex: 1; padding: 0.875rem 1rem; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); border-radius: var(--radius-sm); color: white; font-family: 'Inter', sans-serif; }
+        .newsletter-form input::placeholder { color: rgba(255,255,255,0.4); }
+        .newsletter-form button { padding: 0.875rem 1.25rem; background: var(--cherry-red); color: white; border: none; border-radius: var(--radius-sm); cursor: pointer; transition: all 0.3s; }
+        .newsletter-form button:hover { background: var(--cherry-dark); }
+        .footer-bottom { max-width: 1400px; margin: 0 auto; padding: 2rem 2rem 0; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        .footer-bottom p { color: rgba(255,255,255,0.5); font-size: 0.9rem; }
+        .payment-icons { display: flex; gap: 1rem; font-size: 1.5rem; color: rgba(255,255,255,0.5); }
+
+        .whatsapp-float { position: fixed; bottom: 2rem; right: 2rem; width: 60px; height: 60px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.75rem; box-shadow: 0 4px 20px rgba(37,211,102,0.4); cursor: pointer; z-index: 999; transition: all 0.3s; text-decoration: none; }
+        .whatsapp-float:hover { transform: scale(1.1) translateY(-5px); box-shadow: 0 8px 30px rgba(37,211,102,0.5); }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.4,0,0.2,1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 2rem; }
+        .modal-overlay.active { display: flex; }
+        .modal { background: var(--white); border-radius: var(--radius-xl); max-width: 500px; width: 100%; max-height: 90vh; overflow-y: auto; box-shadow: var(--shadow-strong); animation: modalIn 0.4s cubic-bezier(0.4,0,0.2,1); }
+        @keyframes modalIn { from { opacity: 0; transform: scale(0.9) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+        .modal-header { padding: 2rem 2rem 1rem; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+        .modal-header h3 { font-size: 1.5rem; }
+        .modal-close { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-gray); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
+        .modal-close:hover { background: var(--light-gray); color: var(--text-dark); }
+        .modal-body { padding: 2rem; }
+        .tab-buttons { display: flex; gap: 0.5rem; margin-bottom: 2rem; background: var(--light-gray); padding: 0.5rem; border-radius: var(--radius-sm); }
+        .tab-btn { flex: 1; padding: 0.75rem; border: none; background: none; border-radius: var(--radius-sm); font-weight: 600; cursor: pointer; transition: all 0.3s; color: var(--text-gray); }
+        .tab-btn.active { background: var(--white); color: var(--cherry-red); box-shadow: var(--shadow-soft); }
+        .otp-inputs { display: flex; gap: 0.75rem; justify-content: center; margin: 1.5rem 0; }
+        .otp-inputs input { width: 50px; height: 50px; text-align: center; font-size: 1.25rem; border: 2px solid #e5e5e5; border-radius: var(--radius-sm); font-weight: 700; }
+        .otp-inputs input:focus { outline: none; border-color: var(--cherry-red); }
+
+        .search-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.9); backdrop-filter: blur(20px); z-index: 2000; display: none; align-items: flex-start; justify-content: center; padding-top: 15vh; }
+        .search-overlay.active { display: flex; }
+        .search-container { width: 100%; max-width: 800px; padding: 0 2rem; }
+        .search-input-wrapper { position: relative; margin-bottom: 2rem; }
+        .search-input-wrapper input { width: 100%; padding: 1.5rem 1.5rem 1.5rem 3.5rem; font-size: 1.5rem; border: none; border-bottom: 2px solid rgba(255,255,255,0.3); background: transparent; color: white; font-family: 'Inter', sans-serif; }
+        .search-input-wrapper input:focus { outline: none; border-bottom-color: var(--cherry-red); }
+        .search-input-wrapper i { position: absolute; left: 0; top: 50%; transform: translateY(-50%); color: rgba(255,255,255,0.5); font-size: 1.25rem; }
+        .search-close { position: absolute; top: 2rem; right: 2rem; background: none; border: none; color: white; font-size: 2rem; cursor: pointer; }
+
+        .cart-sidebar { position: fixed; top: 0; right: -450px; width: 450px; max-width: 100%; height: 100vh; background: var(--white); z-index: 2000; box-shadow: -10px 0 40px rgba(0,0,0,0.2); transition: right 0.4s cubic-bezier(0.4,0,0.2,1); display: flex; flex-direction: column; }
+        .cart-sidebar.active { right: 0; }
+        .cart-header { padding: 1.5rem 2rem; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+        .cart-header h3 { font-size: 1.25rem; }
+        .cart-items { flex: 1; overflow-y: auto; padding: 1.5rem 2rem; }
+        .cart-item { display: flex; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid #f5f5f5; }
+        .cart-item-img { width: 80px; height: 100px; border-radius: var(--radius-sm); overflow: hidden; flex-shrink: 0; }
+        .cart-item-img img { width: 100%; height: 100%; object-fit: cover; }
+        .cart-item-info { flex: 1; }
+        .cart-item-info h4 { font-size: 0.95rem; margin-bottom: 0.25rem; }
+        .cart-item-info p { color: var(--cherry-red); font-weight: 600; font-size: 0.9rem; }
+        .cart-item-qty { display: flex; align-items: center; gap: 0.75rem; margin-top: 0.5rem; }
+        .qty-btn { width: 28px; height: 28px; border: 1px solid #e5e5e5; background: var(--white); border-radius: 4px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 0.8rem; }
+        .cart-footer { padding: 1.5rem 2rem; border-top: 1px solid #eee; background: var(--off-white); }
+        .cart-total { display: flex; justify-content: space-between; margin-bottom: 1rem; font-size: 1.1rem; }
+        .cart-total span:last-child { font-weight: 700; color: var(--cherry-red); font-size: 1.25rem; }
+        .checkout-btn { width: 100%; padding: 1rem; background: var(--cherry-red); color: white; border: none; border-radius: var(--radius-sm); font-weight: 600; font-size: 1rem; cursor: pointer; transition: all 0.3s; }
+        .checkout-btn:hover { background: var(--cherry-dark); }
+        .cart-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1999; display: none; }
+        .cart-overlay.active { display: block; }
+
+        .mobile-menu { position: fixed; top: 0; left: -100%; width: 80%; max-width: 400px; height: 100vh; background: var(--white); z-index: 2000; transition: left 0.4s cubic-bezier(0.4,0,0.2,1); overflow-y: auto; box-shadow: 10px 0 40px rgba(0,0,0,0.2); }
+        .mobile-menu.active { left: 0; }
+        .mobile-menu-header { padding: 1.5rem; background: linear-gradient(135deg, var(--cherry-red), var(--cherry-dark)); color: white; }
+        .mobile-menu-header h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; }
+        .mobile-menu-links { list-style: none; padding: 1rem 0; }
+        .mobile-menu-links a { display: block; padding: 1rem 1.5rem; color: var(--text-dark); text-decoration: none; font-weight: 500; border-bottom: 1px solid #f5f5f5; transition: all 0.3s; }
+        .mobile-menu-links a:hover { background: var(--off-white); color: var(--cherry-red); padding-left: 2rem; }
+        .mobile-menu-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1999; display: none; }
+        .mobile-menu-overlay.active { display: block; }
+
+        .toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--text-dark); color: white; padding: 1rem 2rem; border-radius: var(--radius-sm); box-shadow: var(--shadow-strong); z-index: 3000; display: flex; align-items: center; gap: 0.75rem; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); }
+        .toast.show { transform: translateX(-50%) translateY(0); }
+        .toast i { color: #22c55e; }
+
+        .lang-switch { position: relative; }
+        .lang-dropdown { position: absolute; top: 100%; right: 0; background: var(--white); border-radius: var(--radius-md); box-shadow: var(--shadow-strong); padding: 0.5rem; min-width: 150px; display: none; margin-top: 0.5rem; border: 1px solid rgba(0,0,0,0.05); }
+        .lang-dropdown.active { display: block; }
+        .lang-option { padding: 0.75rem 1rem; cursor: pointer; border-radius: var(--radius-sm); transition: all 0.3s; font-size: 0.9rem; display: flex; align-items: center; gap: 0.75rem; }
+        .lang-option:hover { background: var(--off-white); color: var(--cherry-red); }
+
+        .filter-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2rem; justify-content: center; }
+        .filter-tag { padding: 0.5rem 1rem; background: var(--off-white); border: 1px solid #e5e5e5; border-radius: 50px; font-size: 0.85rem; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 0.5rem; }
+        .filter-tag:hover, .filter-tag.active { background: var(--cherry-red); color: white; border-color: var(--cherry-red); }
+
+        .product-modal { max-width: 900px; }
+        .product-detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        .product-gallery { display: grid; grid-template-columns: 1fr 4fr; gap: 1rem; }
+        .gallery-thumbs { display: flex; flex-direction: column; gap: 0.5rem; }
+        .gallery-thumb { aspect-ratio: 1; border-radius: var(--radius-sm); overflow: hidden; cursor: pointer; border: 2px solid transparent; transition: all 0.3s; }
+        .gallery-thumb.active { border-color: var(--cherry-red); }
+        .gallery-thumb img { width: 100%; height: 100%; object-fit: cover; }
+        .gallery-main { border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 3/4; }
+        .gallery-main img { width: 100%; height: 100%; object-fit: cover; }
+        .product-detail-info h2 { font-size: 1.75rem; margin-bottom: 0.5rem; }
+        .product-sku { color: var(--text-light); font-size: 0.85rem; margin-bottom: 1rem; }
+        .product-detail-price { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid #eee; }
+        .detail-wholesale { font-size: 2rem; font-weight: 700; color: var(--cherry-red); }
+        .detail-retail { font-size: 1.25rem; color: var(--text-light); text-decoration: line-through; }
+        .detail-discount { background: var(--cherry-red); color: white; padding: 0.25rem 0.75rem; border-radius: 50px; font-size: 0.8rem; font-weight: 600; }
+        .quantity-selector { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+        .qty-label { font-weight: 600; }
+        .qty-controls { display: flex; align-items: center; border: 2px solid #e5e5e5; border-radius: var(--radius-sm); overflow: hidden; }
+        .qty-controls button { width: 40px; height: 40px; background: var(--white); border: none; cursor: pointer; font-size: 1rem; transition: all 0.3s; }
+        .qty-controls button:hover { background: var(--light-gray); }
+        .qty-controls input { width: 60px; height: 40px; border: none; text-align: center; font-weight: 600; font-size: 1rem; }
+        .moq-info { background: var(--off-white); padding: 1rem; border-radius: var(--radius-sm); margin-bottom: 1.5rem; font-size: 0.9rem; color: var(--text-gray); display: flex; align-items: center; gap: 0.75rem; }
+        .moq-info i { color: var(--cherry-red); }
+        .detail-actions { display: flex; gap: 1rem; }
+        .detail-actions .btn-primary { flex: 1; justify-content: center; padding: 1rem; }
+        .wishlist-btn-large { width: 50px; height: 50px; border: 2px solid #e5e5e5; background: var(--white); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.2rem; transition: all 0.3s; }
+        .wishlist-btn-large:hover { border-color: var(--cherry-red); color: var(--cherry-red); }
+
+        .admin-preview { background: var(--text-dark); color: white; border-radius: var(--radius-xl); overflow: hidden; margin-top: 2rem; }
+        .admin-header { background: linear-gradient(135deg, var(--cherry-red), var(--cherry-dark)); padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .admin-header h4 { font-size: 1.25rem; }
+        .admin-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; padding: 2rem; }
+        .admin-stat { background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid rgba(255,255,255,0.1); }
+        .admin-stat h5 { font-size: 2rem; color: var(--soft-gold); margin-bottom: 0.5rem; }
+        .admin-stat p { font-size: 0.9rem; color: rgba(255,255,255,0.6); }
+        .admin-chart { padding: 0 2rem 2rem; height: 200px; background: rgba(255,255,255,0.02); margin: 0 2rem 2rem; border-radius: var(--radius-md); display: flex; align-items: flex-end; justify-content: space-around; padding-bottom: 1rem; }
+        .chart-bar { width: 40px; background: linear-gradient(to top, var(--cherry-red), var(--soft-gold)); border-radius: 4px 4px 0 0; transition: all 0.3s; }
+        .chart-bar:hover { opacity: 0.8; }
+
+        .custom-checkbox { display: flex; align-items: center; gap: 0.5rem; cursor: pointer; }
+        .custom-checkbox input { display: none; }
+        .checkmark { width: 20px; height: 20px; border: 2px solid #e5e5e5; border-radius: 4px; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
+        .custom-checkbox input:checked + .checkmark { background: var(--cherry-red); border-color: var(--cherry-red); color: white; }
+
+        @media (max-width: 1200px) { .product-grid, .category-grid { grid-template-columns: repeat(3, 1fr); } .features-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 992px) { .nav-links { display: none; } .mobile-toggle { display: flex; } .hero-images { width: 100%; opacity: 0.3; } .hero-content { text-align: center; display: flex; flex-direction: column; align-items: center; } .hero h1 { max-width: 100%; } .hero-stats { justify-content: center; } .wholesale-container, .about-container, .contact-container { grid-template-columns: 1fr; } .footer-container { grid-template-columns: 1fr 1fr; } .gallery-grid { grid-template-columns: repeat(2, 1fr); } .features-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 768px) { .product-grid, .category-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; } .testimonials-grid { grid-template-columns: 1fr; } .benefits-grid { grid-template-columns: 1fr; } .form-grid { grid-template-columns: 1fr; } .footer-container { grid-template-columns: 1fr; gap: 2rem; } .gallery-grid { grid-template-columns: 1fr; grid-auto-rows: 250px; } .gallery-item.tall, .gallery-item.wide { grid-row: span 1; grid-column: span 1; } .hero-buttons { justify-content: center; } .hero-stats { flex-direction: column; gap: 1.5rem; text-align: center; } .about-images { grid-template-columns: 1fr; } .about-img-main { grid-row: span 1; } .experience-badge { right: 1rem; bottom: 1rem; } .features-grid { grid-template-columns: 1fr; } .product-detail-grid { grid-template-columns: 1fr; } .product-gallery { grid-template-columns: 1fr; } .gallery-thumbs { flex-direction: row; order: 2; } .admin-stats { grid-template-columns: repeat(2, 1fr); } .cart-sidebar { width: 100%; } }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon"><i class="fas fa-gem"></i></div>
+                <span class="logo-text">Cherry Store</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#sarees">Sarees</a></li>
+                <li><a href="#wholesale">Wholesale</a></li>
+                <li><a href="#grocery">Grocery</a></li>
+                <li><a href="#collections">Collections</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="nav-btn" onclick="toggleSearch()"><i class="fas fa-search"></i></button>
+                <div class="lang-switch">
+                    <button class="nav-btn" onclick="toggleLang()"><i class="fas fa-globe"></i></button>
+                    <div class="lang-dropdown" id="langDropdown">
+                        <div class="lang-option" onclick="selectLang('en')"><span>🇺🇸</span> English</div>
+                        <div class="lang-option" onclick="selectLang('hi')"><span>🇮🇳</span> हिंदी</div>
+                        <div class="lang-option" onclick="selectLang('my')"><span>🇲🇲</span> မြန်မာ</div>
+                    </div>
+                </div>
+                <button class="nav-btn" onclick="toggleCart()"><i class="fas fa-shopping-bag"></i><span class="cart-count" id="cartCount">3</span></button>
+                <button class="nav-btn" onclick="openAuthModal()"><i class="fas fa-user"></i></button>
+                <a href="#wholesale" class="btn-primary" style="display: inline-flex;">Partner with Us</a>
+                <div class="mobile-toggle" onclick="toggleMobileMenu()">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <h3>Cherry Store</h3>
+            <p style="opacity: 0.8; font-size: 0.9rem;">Premium Wholesale</p>
+        </div>
+        <ul class="mobile-menu-links">
+            <li><a href="#home" onclick="toggleMobileMenu()">Home</a></li>
+            <li><a href="#sarees" onclick="toggleMobileMenu()">Sarees</a></li>
+            <li><a href="#wholesale" onclick="toggleMobileMenu()">Wholesale</a></li>
+            <li><a href="#grocery" onclick="toggleMobileMenu()">Grocery</a></li>
+            <li><a href="#collections" onclick="toggleMobileMenu()">Collections</a></li>
+            <li><a href="#about" onclick="toggleMobileMenu()">About Us</a></li>
+            <li><a href="#contact" onclick="toggleMobileMenu()">Contact</a></li>
+        </ul>
+        <div style="padding: 1.5rem;">
+            <button class="btn-primary" style="width: 100%; justify-content: center;" onclick="openAuthModal(); toggleMobileMenu();">Login / Register</button>
+        </div>
+    </div>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="searchOverlay">
+        <button class="search-close" onclick="toggleSearch()"><i class="fas fa-times"></i></button>
+        <div class="search-container">
+            <div class="search-input-wrapper">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search sarees, kurtis, grocery..." id="searchInput" onkeyup="handleSearch(event)">
+            </div>
+            <div style="color: rgba(255,255,255,0.5); font-size: 0.9rem;">
+                <p style="margin-bottom: 1rem;">Popular Searches:</p>
+                <div class="filter-tags" style="justify-content: flex-start;">
+                    <span class="filter-tag" style="background: rgba(255,255,255,0.1); color: white; border-color: rgba(255,255,255,0.2);">Banarasi Saree</span>
+                    <span class="filter-tag" style="background: rgba(255,255,255,0.1); color: white; border-color: rgba(255,255,255,0.2);">Silk Saree</span>
+                    <span class="filter-tag" style="background: rgba(255,255,255,0.1); color: white; border-color: rgba(255,255,255,0.2);">Bridal Collection</span>
+                    <span class="filter-tag" style="background: rgba(255,255,255,0.1); color: white; border-color: rgba(255,255,255,0.2);">Cotton Kurtis</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Your Cart (3)</h3>
+            <button class="modal-close" onclick="toggleCart()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-items">
+            <div class="cart-item">
+                <div class="cart-item-img"><img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=200&h=250&fit=crop" alt="Saree"></div>
+                <div class="cart-item-info">
+                    <h4>Banarasi Silk Saree - Red</h4>
+                    <p>$45.00 <span style="color: var(--text-light); text-decoration: line-through; font-size: 0.8rem;">$89.00</span></p>
+                    <div class="cart-item-qty">
+                        <button class="qty-btn" onclick="updateQty(this, -1)">-</button>
+                        <span>2</span>
+                        <button class="qty-btn" onclick="updateQty(this, 1)">+</button>
+                    </div>
+                </div>
+            </div>
+            <div class="cart-item">
+                <div class="cart-item-img"><img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=200&h=250&fit=crop" alt="Kurti"></div>
+                <div class="cart-item-info">
+                    <h4>Designer Cotton Kurti</h4>
+                    <p>$18.00 <span style="color: var(--text-light); text-decoration: line-through; font-size: 0.8rem;">$35.00</span></p>
+                    <div class="cart-item-qty">
+                        <button class="qty-btn" onclick="updateQty(this, -1)">-</button>
+                        <span>1</span>
+                        <button class="qty-btn" onclick="updateQty(this, 1)">+</button>
+                    </div>
+                </div>
+            </div>
+            <div class="cart-item">
+                <div class="cart-item-img"><img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=200&h=250&fit=crop" alt="Accessory"></div>
+                <div class="cart-item-info">
+                    <h4>Traditional Jewelry Set</h4>
+                    <p>$32.00 <span style="color: var(--text-light); text-decoration: line-through; font-size: 0.8rem;">$65.00</span></p>
+                    <div class="cart-item-qty">
+                        <button class="qty-btn" onclick="updateQty(this, -1)">-</button>
+                        <span>1</span>
+                        <button class="qty-btn" onclick="updateQty(this, 1)">+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total</span>
+                <span>$140.00</span>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-gray); margin-bottom: 1rem;">MOQ: 10 pieces per style for wholesale pricing</p>
+            <button class="checkout-btn" onclick="showToast('Proceeding to checkout...')">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div class="modal-overlay" id="authModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Welcome to Cherry Store</h3>
+                <button class="modal-close" onclick="closeAuthModal()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="tab-buttons">
+                    <button class="tab-btn active" onclick="switchTab('login')">Login</button>
+                    <button class="tab-btn" onclick="switchTab('register')">Register</button>
+                </div>
+                <div id="loginTab">
+                    <div class="form-group full">
+                        <label>Email / Phone</label>
+                        <input type="text" placeholder="Enter your email or phone">
+                    </div>
+                    <div class="form-group full">
+                        <label>Password</label>
+                        <input type="password" placeholder="Enter your password">
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                        <label class="custom-checkbox">
+                            <input type="checkbox">
+                            <span class="checkmark"><i class="fas fa-check" style="font-size: 0.7rem;"></i></span>
+                            <span style="font-size: 0.85rem; color: var(--text-gray);">Remember me</span>
+                        </label>
+                        <a href="#" style="font-size: 0.85rem; color: var(--cherry-red); text-decoration: none;">Forgot Password?</a>
+                    </div>
+                    <button class="submit-btn" onclick="showToast('Login successful!')">Login</button>
+                    <div style="text-align: center; margin-top: 1.5rem;">
+                        <p style="font-size: 0.9rem; color: var(--text-gray); margin-bottom: 1rem;">Or login with OTP</p>
+                        <button class="btn-outline" style="width: 100%; justify-content: center; border-color: #e5e5e5; color: var(--text-dark);" onclick="showOTP()">
+                            <i class="fas fa-mobile-alt"></i> Send OTP
+                        </button>
+                    </div>
+                </div>
+                <div id="registerTab" style="display: none;">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" placeholder="Your name">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="tel" placeholder="+95...">
+                        </div>
+                    </div>
+                    <div class="form-group full">
+                        <label>Email</label>
+                        <input type="email" placeholder="your@email.com">
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" placeholder="Create password">
+                        </div>
+                        <div class="form-group">
+                            <label>Confirm Password</label>
+                            <input type="password" placeholder="Confirm password">
+                        </div>
+                    </div>
+                    <div class="form-group full">
+                        <label>Business Type</label>
+                        <select>
+                            <option>Select business type</option>
+                            <option>Retail Shop</option>
+                            <option>Online Store</option>
+                            <option>Wholesale Dealer</option>
+                            <option>Individual Buyer</option>
+                        </select>
+                    </div>
+                    <label class="custom-checkbox" style="margin-bottom: 1.5rem;">
+                        <input type="checkbox">
+                        <span class="checkmark"><i class="fas fa-check" style="font-size: 0.7rem;"></i></span>
+                        <span style="font-size: 0.85rem; color: var(--text-gray);">I agree to the Terms & Conditions</span>
+                    </label>
+                    <button class="submit-btn" onclick="showToast('Registration successful!')">Create Account</button>
+                </div>
+                <div id="otpTab" style="display: none;">
+                    <p style="text-align: center; color: var(--text-gray); margin-bottom: 1.5rem;">Enter the 6-digit code sent to your phone</p>
+                    <div class="otp-inputs">
+                        <input type="text" maxlength="1" onkeyup="moveOTP(this, 0)">
+                        <input type="text" maxlength="1" onkeyup="moveOTP(this, 1)">
+                        <input type="text" maxlength="1" onkeyup="moveOTP(this, 2)">
+                        <input type="text" maxlength="1" onkeyup="moveOTP(this, 3)">
+                        <input type="text" maxlength="1" onkeyup="moveOTP(this, 4)">
+                        <input type="text" maxlength="1" onkeyup="moveOTP(this, 5)">
+                    </div>
+                    <button class="submit-btn" onclick="verifyOTP()">Verify OTP</button>
+                    <p style="text-align: center; margin-top: 1rem; font-size: 0.9rem;">
+                        Didn't receive? <a href="#" style="color: var(--cherry-red); text-decoration: none;">Resend</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Detail Modal -->
+    <div class="modal-overlay" id="productModal">
+        <div class="modal product-modal">
+            <div class="modal-header">
+                <h3>Product Details</h3>
+                <button class="modal-close" onclick="closeProductModal()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="product-detail-grid">
+                    <div class="product-gallery">
+                        <div class="gallery-thumbs">
+                            <div class="gallery-thumb active" onclick="changeImage(this, 0)">
+                                <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=150&h=150&fit=crop" alt="Thumb 1">
+                            </div>
+                            <div class="gallery-thumb" onclick="changeImage(this, 1)">
+                                <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=150&h=150&fit=crop" alt="Thumb 2">
+                            </div>
+                            <div class="gallery-thumb" onclick="changeImage(this, 2)">
+                                <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=150&h=150&fit=crop" alt="Thumb 3">
+                            </div>
+                            <div class="gallery-thumb" onclick="changeImage(this, 3)">
+                                <img src="https://images.unsplash.com/photo-1583391733952-0c5ebf1a5df2?w=150&h=150&fit=crop" alt="Thumb 4">
+                            </div>
+                        </div>
+                        <div class="gallery-main">
+                            <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=600&h=800&fit=crop" alt="Main" id="mainProductImage">
+                        </div>
+                    </div>
+                    <div class="product-detail-info">
+                        <h2>Premium Banarasi Silk Saree</h2>
+                        <p class="product-sku">SKU: CS-BS-2024-001</p>
+                        <div class="stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                            <span style="color: var(--text-gray); font-size: 0.85rem; margin-left: 0.5rem;">(128 reviews)</span>
+                        </div>
+                        <div class="product-detail-price">
+                            <span class="detail-wholesale">$45.00</span>
+                            <span class="detail-retail">$89.00</span>
+                            <span class="detail-discount">-49%</span>
+                        </div>
+                        <div class="moq-info">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Minimum Order Quantity: 10 pieces for wholesale price</span>
+                        </div>
+                        <div class="quantity-selector">
+                            <span class="qty-label">Quantity:</span>
+                            <div class="qty-controls">
+                                <button onclick="adjustQty(-1)">-</button>
+                                <input type="text" value="10" id="detailQty" readonly>
+                                <button onclick="adjustQty(1)">+</button>
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 1.5rem;">
+                            <p style="font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem;">Colors:</p>
+                            <div style="display: flex; gap: 0.5rem;">
+                                <span style="width: 30px; height: 30px; background: #C1121F; border-radius: 50%; cursor: pointer; border: 2px solid var(--cherry-red);"></span>
+                                <span style="width: 30px; height: 30px; background: #1a1a1a; border-radius: 50%; cursor: pointer; border: 2px solid transparent;"></span>
+                                <span style="width: 30px; height: 30px; background: #D4AF37; border-radius: 50%; cursor: pointer; border: 2px solid transparent;"></span>
+                                <span style="width: 30px; height: 30px; background: #4a7c59; border-radius: 50%; cursor: pointer; border: 2px solid transparent;"></span>
+                            </div>
+                        </div>
+                        <div class="detail-actions">
+                            <button class="btn-primary" onclick="addToCart(); closeProductModal();">
+                                <i class="fas fa-shopping-bag"></i> Add to Cart
+                            </button>
+                            <button class="wishlist-btn-large"><i class="far fa-heart"></i></button>
+                        </div>
+                        <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #eee;">
+                            <p style="font-size: 0.9rem; color: var(--text-gray); line-height: 1.6;">
+                                <strong>Description:</strong> Handwoven Banarasi silk saree with intricate zari work. 
+                                Perfect for weddings and special occasions. Direct import from Varanasi, India.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Item added to cart!</span>
+    </div>
+onclick="closeAuthModal()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="tab-buttons">
+                    <button class="tab-btn active" onclick="switchTab('login')">Login</button>
+                    <button class="tab-btn" onclick="switchTab('register')">Register</button>
+                </div>
+                <div id="loginTab">
+                    <div class="form-group full">
+                        <label>Email / Phone</label>
+                        <input type="text" placeholder="Enter your email or phone">
+                    </div>
+                    <div class="form-group full">
+                        <label>Password</label>
+                        <input type="password" placeholder="Enter your password">
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                        <label class="custom-checkbox">
+                            <input type="checkbox">
+                            <span class="checkmark"><i class="fas fa-check" style="font-size: 0.7rem;"></i></span>
+                            <span style="font-size: 0.85rem; color: var(--text-gray);">Remember me</span>
+                        </label>
+                        <a href="#" style="font-size: 0.85rem; color: var(--cherry-red); text-decoration: none;">Forgot Password?</a>
+                    </div>
+                    <button class="submit-btn" onclick="showToast('Login successful!')">Login</button>
+                    <div style="text-align: center; margin-top: 1.5rem;">
+                        <p style="font-size: 0.9rem; color: var(--text-gray); margin-bottom: 1rem;">Or login with OTP</p>
+                        <button class="btn-outline" style="width: 100%; justify-content: center; border-color: #e5e5e5; color: var(--text-dark);" onclick="showOTP()">
+                            <i class="fas fa-mobile-alt"></i> Send OTP
+                        </button>
+                    </div>
+                </div>
+                <div id="registerTab" style="display: none;">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" placeholder="Your name">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="tel" placeholder="+95...">
+                        </div>
+                    </div>
+                    <div class="form-group full">
+                        <label>Email</label>
+                        <input type="email" placeholder="your@email.com">
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" placeholder="Create password">
+                        </div>
+                        <div class="form-group">
+                            <label>Confirm Password</label>
+                            <input type="password" placeholder="Confirm password">
+                        </div>
+                    </div>
+                    <div class="form-group full">
+                        <label>Business Type</label>
+                        <select>
+                            <option>Select business type</option>
+                            <option>Retail Shop</option>
+                            <option>Online Store</option>
+                            <option>Wholesale Dealer</option>
+                            <option>Individual Buyer</option>
+                        </select>
+                    </div>
+                    <label class="custom-checkbox" style="margin-bottom: 1.5rem;">
+                        <input type="checkbox">
+                        <span class="checkmark"><i class="fas fa-check" style="font-size: 0.7rem;"></i></span>
+                        <span style="font-size: 0.85rem; color: var(--text-gray);">I agree to the Terms & Conditions</span>
+                    </label>
+                    <button class="submit-btn" onclick="showToast('Registration successful!')">Create Account</button>
+                </div>
+                <div id="otpTab" style="display: none;">
+                    <p style="text-align: center; color: var(--text-gray); margin-bottom: 1.5rem;">Enter the 6-digit code sent to your phone</p>
+                    <div class="otp-inputs">
+                        <input type="text" maxlength="1" onkeyup="moveOTP(this, 0)">
+                        <input type="text" maxlength="1" onkeyup="moveOTP(this, 1)">
+                        <input type="text" maxlength="1" onkeyup="moveOTP(this, 2)">
+                        <input type="text" maxlength="1" onkeyup="moveOTP(this, 3)">
+                        <input type="text" maxlength="1" onkeyup="moveOTP(this, 4)">
+                        <input type="text" maxlength="1" onkeyup="moveOTP(this, 5)">
+                    </div>
+                    <button class="submit-btn" onclick="verifyOTP()">Verify OTP</button>
+                    <p style="text-align: center; margin-top: 1rem; font-size: 0.9rem;">
+                        Didn't receive? <a href="#" style="color: var(--cherry-red); text-decoration: none;">Resend</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Detail Modal -->
+    <div class="modal-overlay" id="productModal">
+        <div class="modal product-modal">
+            <div class="modal-header">
+                <h3>Product Details</h3>
+                <button class="modal-close" onclick="closeProductModal()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="product-detail-grid">
+                    <div class="product-gallery">
+                        <div class="gallery-thumbs">
+                            <div class="gallery-thumb active" onclick="changeImage(this, 0)">
+                                <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=150&h=150&fit=crop" alt="Thumb 1">
+                            </div>
+                            <div class="gallery-thumb" onclick="changeImage(this, 1)">
+                                <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=150&h=150&fit=crop" alt="Thumb 2">
+                            </div>
+                            <div class="gallery-thumb" onclick="changeImage(this, 2)">
+                                <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=150&h=150&fit=crop" alt="Thumb 3">
+                            </div>
+                            <div class="gallery-thumb" onclick="changeImage(this, 3)">
+                                <img src="https://images.unsplash.com/photo-1583391733952-0c5ebf1a5df2?w=150&h=150&fit=crop" alt="Thumb 4">
+                            </div>
+                        </div>
+                        <div class="gallery-main">
+                            <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=600&h=800&fit=crop" alt="Main" id="mainProductImage">
+                        </div>
+                    </div>
+                    <div class="product-detail-info">
+                        <h2>Premium Banarasi Silk Saree</h2>
+                        <p class="product-sku">SKU: CS-BS-2024-001</p>
+                        <div class="stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                            <span style="color: var(--text-gray); font-size: 0.85rem; margin-left: 0.5rem;">(128 reviews)</span>
+                        </div>
+                        <div class="product-detail-price">
+                            <span class="detail-wholesale">$45.00</span>
+                            <span class="detail-retail">$89.00</span>
+                            <span class="detail-discount">-49%</span>
+                        </div>
+                        <div class="moq-info">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Minimum Order Quantity: 10 pieces for wholesale price</span>
+                        </div>
+                        <div class="quantity-selector">
+                            <span class="qty-label">Quantity:</span>
+                            <div class="qty-controls">
+                                <button onclick="adjustQty(-1)">-</button>
+                                <input type="text" value="10" id="detailQty" readonly>
+                                <button onclick="adjustQty(1)">+</button>
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 1.5rem;">
+                            <p style="font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem;">Colors:</p>
+                            <div style="display: flex; gap: 0.5rem;">
+                                <span style="width: 30px; height: 30px; background: #C1121F; border-radius: 50%; cursor: pointer; border: 2px solid var(--cherry-red);"></span>
+                                <span style="width: 30px; height: 30px; background: #1a1a1a; border-radius: 50%; cursor: pointer; border: 2px solid transparent;"></span>
+                                <span style="width: 30px; height: 30px; background: #D4AF37; border-radius: 50%; cursor: pointer; border: 2px solid transparent;"></span>
+                                <span style="width: 30px; height: 30px; background: #4a7c59; border-radius: 50%; cursor: pointer; border: 2px solid transparent;"></span>
+                            </div>
+                        </div>
+                        <div class="detail-actions">
+                            <button class="btn-primary" onclick="addToCart(); closeProductModal();">
+                                <i class="fas fa-shopping-bag"></i> Add to Cart
+                            </button>
+                            <button class="wishlist-btn-large"><i class="far fa-heart"></i></button>
+                        </div>
+                        <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #eee;">
+                            <p style="font-size: 0.9rem; color: var(--text-gray); line-height: 1.6;">
+                                <strong>Description:</strong> Handwoven Banarasi silk saree with intricate zari work. 
+                                Perfect for weddings and special occasions. Direct import from Varanasi, India.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Item added to cart!</span>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg"></div>
+        <div class="hero-images">
+            <div class="hero-img"><img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=400&h=600&fit=crop" alt="Saree 1"></div>
+            <div class="hero-img"><img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400&h=600&fit=crop" alt="Saree 2"></div>
+            <div class="hero-img"><img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=400&h=600&fit=crop" alt="Saree 3"></div>
+            <div class="hero-img"><img src="https://images.unsplash.com/photo-1583391733952-0c5ebf1a5df2?w=400&h=600&fit=crop" alt="Saree 4"></div>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-award"></i>
+                <span>Trusted by 500+ Retailers Across Myanmar</span>
+            </div>
+            <h1 class="reveal">Premium Wholesale <span class="highlight">Sarees</span> & Indian Fashion</h1>
+            <p class="hero-subtitle reveal">Direct wholesale pricing with the latest Indian collections. Quality guaranteed, shipped directly from India to your doorstep.</p>
+            <div class="hero-buttons reveal">
+                <a href="#products" class="btn-primary"><i class="fas fa-shopping-bag"></i> Shop Now</a>
+                <a href="#wholesale" class="btn-outline"><i class="fas fa-handshake"></i> Become a Wholesale Partner</a>
+            </div>
+            <div class="hero-stats reveal">
+                <div class="stat-item">
+                    <h3>10K+</h3>
+                    <p>Products Available</p>
+                </div>
+                <div class="stat-item">
+                    <h3>500+</h3>
+                    <p>Wholesale Partners</p>
+                </div>
+                <div class="stat-item">
+                    <h3>50+</h3>
+                    <p>Cities Served</p>
+                </div>
+                <div class="stat-item">
+                    <h3>99%</h3>
+                    <p>Happy Customers</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="categories" id="sarees">
+        <div class="section-header reveal">
+            <span class="section-label">Browse Collection</span>
+            <h2 class="section-title">Featured Categories</h2>
+            <p class="section-subtitle">Explore our wide range of premium Indian fashion and traditional products</p>
+        </div>
+        <div class="category-grid">
+            <div class="category-card reveal" onclick="showToast('Opening Silk Sarees...')">
+                <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=400&h=600&fit=crop" alt="Silk Sarees">
+                <div class="category-overlay">
+                    <h3 class="category-name">Silk Sarees</h3>
+                    <span class="category-count">240+ Items <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </div>
+            <div class="category-card reveal" onclick="showToast('Opening Cotton Sarees...')">
+                <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400&h=600&fit=crop" alt="Cotton Sarees">
+                <div class="category-overlay">
+                    <h3 class="category-name">Cotton Sarees</h3>
+                    <span class="category-count">180+ Items <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </div>
+            <div class="category-card reveal" onclick="showToast('Opening Bridal Sarees...')">
+                <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=400&h=600&fit=crop" alt="Bridal Sarees">
+                <div class="category-overlay">
+                    <h3 class="category-name">Bridal Sarees</h3>
+                    <span class="category-count">95+ Items <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </div>
+            <div class="category-card reveal" onclick="showToast('Opening Party Wear...')">
+                <img src="https://images.unsplash.com/photo-1583391733952-0c5ebf1a5df2?w=400&h=600&fit=crop" alt="Party Wear">
+                <div class="category-overlay">
+                    <h3 class="category-name">Party Wear</h3>
+                    <span class="category-count">320+ Items <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </div>
+            <div class="category-card reveal" onclick="showToast('Opening Designer Sarees...')">
+                <img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=600&fit=crop" alt="Designer Sarees">
+                <div class="category-overlay">
+                    <h3 class="category-name">Designer Sarees</h3>
+                    <span class="category-count">150+ Items <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </div>
+            <div class="category-card reveal" onclick="showToast('Opening Kurtis...')">
+                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=400&h=600&fit=crop" alt="Kurtis">
+                <div class="category-overlay">
+                    <h3 class="category-name">Kurtis</h3>
+                    <span class="category-count">410+ Items <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </div>
+            <div class="category-card reveal" onclick="showToast('Opening Indian Grocery...')">
+                <img src="https://images.unsplash.com/photo-1606787366850-de6330128bfc?w=400&h=600&fit=crop" alt="Indian Grocery">
+                <div class="category-overlay">
+                    <h3 class="category-name">Indian Grocery</h3>
+                    <span class="category-count">500+ Items <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </div>
+            <div class="category-card reveal" onclick="showToast('Opening Accessories...')">
+                <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=400&h=600&fit=crop" alt="Accessories">
+                <div class="category-overlay">
+                    <h3 class="category-name">Accessories</h3>
+                    <span class="category-count">200+ Items <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products -->
+    <section class="products" id="products">
+        <div class="section-header reveal">
+            <span class="section-label">New Arrivals</span>
+            <h2 class="section-title">Trending Products</h2>
+            <p class="section-subtitle">Handpicked collections with the best wholesale prices</p>
+        </div>
+        <div class="filter-tags reveal">
+            <span class="filter-tag active">All</span>
+            <span class="filter-tag">Silk Sarees</span>
+            <span class="filter-tag">Cotton</span>
+            <span class="filter-tag">Bridal</span>
+            <span class="filter-tag">Kurtis</span>
+            <span class="filter-tag">Grocery</span>
+            <span class="filter-tag">Accessories</span>
+        </div>
+        <div class="product-grid">
+            <div class="product-card reveal">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=400&h=500&fit=crop" alt="Product">
+                    <span class="product-badge">New</span>
+                    <div class="product-actions">
+                        <button class="action-btn" onclick="openProductModal()"><i class="fas fa-eye"></i></button>
+                        <button class="action-btn"><i class="far fa-heart"></i></button>
+                        <button class="action-btn"><i class="fas fa-share-alt"></i></button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Banarasi Silk Saree - Red</h3>
+                    <div class="product-meta">
+                        <div class="price-group">
+                            <span class="wholesale-price">$45.00</span>
+                            <span class="retail-price">$89.00</span>
+                        </div>
+                        <span class="stock-status"><i class="fas fa-check-circle"></i> In Stock</span>
+                    </div>
+                    <button class="add-to-cart" onclick="addToCart()"><i class="fas fa-shopping-bag"></i> Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card reveal">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400&h=500&fit=crop" alt="Product">
+                    <span class="product-badge" style="background: var(--soft-gold);">Hot</span>
+                    <div class="product-actions">
+                        <button class="action-btn" onclick="openProductModal()"><i class="fas fa-eye"></i></button>
+                        <button class="action-btn"><i class="far fa-heart"></i></button>
+                        <button class="action-btn"><i class="fas fa-share-alt"></i></button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Designer Cotton Kurti</h3>
+                    <div class="product-meta">
+                        <div class="price-group">
+                            <span class="wholesale-price">$18.00</span>
+                            <span class="retail-price">$35.00</span>
+                        </div>
+                        <span class="stock-status"><i class="fas fa-check-circle"></i> In Stock</span>
+                    </div>
+                    <button class="add-to-cart" onclick="addToCart()"><i class="fas fa-shopping-bag"></i> Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card reveal">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=400&h=500&fit=crop" alt="Product">
+                    <div class="product-actions">
+                        <button class="action-btn" onclick="openProductModal()"><i class="fas fa-eye"></i></button>
+                        <button class="action-btn"><i class="far fa-heart"></i></button>
+                        <button class="action-btn"><i class="fas fa-share-alt"></i></button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Traditional Jewelry Set</h3>
+                    <div class="product-meta">
+                        <div class="price-group">
+                            <span class="wholesale-price">$32.00</span>
+                            <span class="retail-price">$65.00</span>
+                        </div>
+                        <span class="stock-status low"><i class="fas fa-exclamation-circle"></i> Low Stock</span>
+                    </div>
+                    <button class="add-to-cart" onclick="addToCart()"><i class="fas fa-shopping-bag"></i> Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card reveal">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1583391733952-0c5ebf1a5df2?w=400&h=500&fit=crop" alt="Product">
+                    <span class="product-badge">Sale</span>
+                    <div class="product-actions">
+                        <button class="action-btn" onclick="openProductModal()"><i class="fas fa-eye"></i></button>
+                        <button class="action-btn"><i class="far fa-heart"></i></button>
+                        <button class="action-btn"><i class="fas fa-share-alt"></i></button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Bridal Lehenga - Pink</h3>
+                    <div class="product-meta">
+                        <div class="price-group">
+                            <span class="wholesale-price">$120.00</span>
+                            <span class="retail-price">$240.00</span>
+                        </div>
+                        <span class="stock-status"><i class="fas fa-check-circle"></i> In Stock</span>
+                    </div>
+                    <button class="add-to-cart" onclick="addToCart()"><i class="fas fa-shopping-bag"></i> Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card reveal">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=500&fit=crop" alt="Product">
+                    <div class="product-actions">
+                        <button class="action-btn" onclick="openProductModal()"><i class="fas fa-eye"></i></button>
+                        <button class="action-btn"><i class="far fa-heart"></i></button>
+                        <button class="action-btn"><i class="fas fa-share-alt"></i></button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Kanjeevaram Silk Saree</h3>
+                    <div class="product-meta">
+                        <div class="price-group">
+                            <span class="wholesale-price">$85.00</span>
+                            <span class="retail-price">$170.00</span>
+                        </div>
+                        <span class="stock-status"><i class="fas fa-check-circle"></i> In Stock</span>
+                    </div>
+                    <button class="add-to-cart" onclick="addToCart()"><i class="fas fa-shopping-bag"></i> Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card reveal">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=400&h=500&fit=crop" alt="Product">
+                    <span class="product-badge" style="background: var(--soft-gold);">Best Seller</span>
+                    <div class="product-actions">
+                        <button class="action-btn" onclick="openProductModal()"><i class="fas fa-eye"></i></button>
+                        <button class="action-btn"><i class="far fa-heart"></i></button>
+                        <button class="action-btn"><i class="fas fa-share-alt"></i></button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Embroidered Anarkali Suit</h3>
+                    <div class="product-meta">
+                        <div class="price-group">
+                            <span class="wholesale-price">$55.00</span>
+                            <span class="retail-price">$110.00</span>
+                        </div>
+                        <span class="stock-status"><i class="fas fa-check-circle"></i> In Stock</span>
+                    </div>
+                    <button class="add-to-cart" onclick="addToCart()"><i class="fas fa-shopping-bag"></i> Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card reveal">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1606787366850-de6330128bfc?w=400&h=500&fit=crop" alt="Product">
+                    <div class="product-actions">
+                        <button class="action-btn" onclick="openProductModal()"><i class="fas fa-eye"></i></button>
+                        <button class="action-btn"><i class="far fa-heart"></i></button>
+                        <button class="action-btn"><i class="fas fa-share-alt"></i></button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Premium Basmati Rice 5kg</h3>
+                    <div class="product-meta">
+                        <div class="price-group">
+                            <span class="wholesale-price">$12.00</span>
+                            <span class="retail-price">$22.00</span>
+                        </div>
+                        <span class="stock-status"><i class="fas fa-check-circle"></i> In Stock</span>
+                    </div>
+                    <button class="add-to-cart" onclick="addToCart()"><i class="fas fa-shopping-bag"></i> Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card reveal">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=400&h=500&fit=crop" alt="Product">
+                    <span class="product-badge">New</span>
+                    <div class="product-actions">
+                        <button class="action-btn" onclick="openProductModal()"><i class="fas fa-eye"></i></button>
+                        <button class="action-btn"><i class="far fa-heart"></i></button>
+                        <button class="action-btn"><i class="fas fa-share-alt"></i></button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Kundan Necklace Set</h3>
+                    <div class="product-meta">
+                        <div class="price-group">
+                            <span class="wholesale-price">$28.00</span>
+                            <span class="retail-price">$55.00</span>
+                        </div>
+                        <span class="stock-status low"><i class="fas fa-exclamation-circle"></i> Low Stock</span>
+                    </div>
+                    <button class="add-to-cart" onclick="addToCart()"><i class="fas fa-shopping-bag"></i> Add to Cart</button>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 3rem;">
+            <button class="btn-primary" style="padding: 1rem 2.5rem;"><i class="fas fa-th-large"></i> View All Products</button>
+        </div>
+    </section>
+
+    <!-- Wholesale Section -->
+    <section class="wholesale" id="wholesale">
+        <div class="wholesale-container">
+            <div class="wholesale-content reveal">
+                <span class="section-label">Wholesale Program</span>
+                <h2>Become a Wholesale Partner</h2>
+                <p>Join our network of 500+ successful retailers and access premium Indian fashion at unbeatable wholesale prices. Direct import from India ensures authenticity and quality.</p>
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <div class="benefit-icon"><i class="fas fa-shipping-fast"></i></div>
+                        <h4>Fast Delivery</h4>
+                        <p>3-5 days express shipping across Myanmar</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon"><i class="fas fa-tags"></i></div>
+                        <h4>Best Wholesale Price</h4>
+                        <p>Up to 50% off retail prices on bulk orders</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon"><i class="fas fa-gem"></i></div>
+                        <h4>Premium Quality</h4>
+                        <p>Direct from Indian manufacturers</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon"><i class="fas fa-globe-asia"></i></div>
+                        <h4>International Shipping</h4>
+                        <p>We ship to Myanmar and beyond</p>
+                    </div>
+                </div>
+                <div style="background: var(--white); padding: 1.5rem; border-radius: var(--radius-md); box-shadow: var(--shadow-soft); margin-bottom: 2rem;">
+                    <h4 style="margin-bottom: 1rem; font-size: 1.1rem;"><i class="fas fa-info-circle" style="color: var(--cherry-red); margin-right: 0.5rem;"></i>Minimum Order Quantity (MOQ)</h4>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
+                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                            <i class="fas fa-check-circle" style="color: #22c55e;"></i>
+                            <span style="font-size: 0.9rem;">Sarees: 10 pieces/style</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                            <i class="fas fa-check-circle" style="color: #22c55e;"></i>
+                            <span style="font-size: 0.9rem;">Kurtis: 15 pieces/style</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                            <i class="fas fa-check-circle" style="color: #22c55e;"></i>
+                            <span style="font-size: 0.9rem;">Grocery: $200 minimum</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                            <i class="fas fa-check-circle" style="color: #22c55e;"></i>
+                            <span style="font-size: 0.9rem;">Accessories: 20 pieces</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="wholesale-form reveal">
+                <h3 class="form-title">Wholesale Inquiry</h3>
+                <p class="form-subtitle">Fill out the form below and our team will contact you within 24 hours</p>
+                <form onsubmit="event.preventDefault(); showToast('Inquiry submitted successfully!');">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Full Name *</label>
+                            <input type="text" placeholder="Your full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Shop/Business Name *</label>
+                            <input type="text" placeholder="Your business name" required>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Country *</label>
+                            <select required>
+                                <option value="">Select Country</option>
+                                <option value="mm">Myanmar</option>
+                                <option value="th">Thailand</option>
+                                <option value="bd">Bangladesh</option>
+                                <option value="in">India</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>WhatsApp Number *</label>
+                            <input type="tel" placeholder="+95..." required>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Business Type *</label>
+                            <select required>
+                                <option value="">Select Type</option>
+                                <option>Retail Shop</option>
+                                <option>Online Store</option>
+                                <option>Wholesale Dealer</option>
+                                <option>Exporter</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Monthly Order Estimate</label>
+                            <select>
+                                <option value="">Select Range</option>
+                                <option>$500 - $1,000</option>
+                                <option>$1,000 - $5,000</option>
+                                <option>$5,000 - $10,000</option>
+                                <option>$10,000+</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group full">
+                        <label>Product Interest</label>
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem;">
+                            <label class="custom-checkbox">
+                                <input type="checkbox"><span class="checkmark"><i class="fas fa-check" style="font-size: 0.7rem;"></i></span>
+                                <span style="font-size: 0.85rem;">Silk Sarees</span>
+                            </label>
+                            <label class="custom-checkbox">
+                                <input type="checkbox"><span class="checkmark"><i class="fas fa-check" style="font-size: 0.7rem;"></i></span>
+                                <span style="font-size: 0.85rem;">Cotton Sarees</span>
+                            </label>
+                            <label class="custom-checkbox">
+                                <input type="checkbox"><span class="checkmark"><i class="fas fa-check" style="font-size: 0.7rem;"></i></span>
+                                <span style="font-size: 0.85rem;">Bridal Wear</span>
+                            </label>
+                            <label class="custom-checkbox">
+                                <input type="checkbox"><span class="checkmark"><i class="fas fa-check" style="font-size: 0.7rem;"></i></span>
+                                <span style="font-size: 0.85rem;">Kurtis & Suits</span>
+                            </label>
+                            <label class="custom-checkbox">
+                                <input type="checkbox"><span class="checkmark"><i class="fas fa-check" style="font-size: 0.7rem;"></i></span>
+                                <span style="font-size: 0.85rem;">Indian Grocery</span>
+                            </label>
+                            <label class="custom-checkbox">
+                                <input type="checkbox"><span class="checkmark"><i class="fas fa-check" style="font-size: 0.7rem;"></i></span>
+                                <span style="font-size: 0.85rem;">Accessories</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group full">
+                        <label>Message</label>
+                        <textarea placeholder="Tell us about your requirements..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> Submit Inquiry</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+        <div class="section-header reveal">
+            <span class="section-label">Why Choose Us</span>
+            <h2 class="section-title">The Cherry Store Advantage</h2>
+            <p class="section-subtitle">We go the extra mile to ensure your business succeeds</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-item reveal">
+                <div class="feature-icon"><i class="fas fa-plane"></i></div>
+                <h4>Direct Import</h4>
+                <p>Direct sourcing from India ensures authentic products at the best prices</p>
+            </div>
+            <div class="feature-item reveal">
+                <div class="feature-icon"><i class="fas fa-percentage"></i></div>
+                <h4>Wholesale Pricing</h4>
+                <p>Up to 50% savings compared to retail with our bulk pricing model</p>
+            </div>
+            <div class="feature-item reveal">
+                <div class="feature-icon"><i class="fas fa-shipping-fast"></i></div>
+                <h4>Myanmar Shipping</h4>
+                <p>Fast and reliable delivery to all major cities in Myanmar</p>
+            </div>
+            <div class="feature-item reveal">
+                <div class="feature-icon"><i class="fas fa-users"></i></div>
+                <h4>Trusted Retailers</h4>
+                <p>500+ retail partners trust us for their inventory needs</p>
+            </div>
+            <div class="feature-item reveal">
+                <div class="feature-icon"><i class="fas fa-headset"></i></div>
+                <h4>24/7 Support</h4>
+                <p>Round-the-clock customer support via WhatsApp and phone</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="section-header reveal">
+            <span class="section-label">Testimonials</span>
+            <h2 class="section-title">What Our Partners Say</h2>
+            <p class="section-subtitle">Real feedback from real business owners</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card reveal">
+                <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                <div class="stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">"Cherry Store has transformed my retail business. The quality of sarees is exceptional, and the wholesale prices allow me to maintain healthy margins. Their delivery is always on time."</p>
+                <div class="testimonial-author">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="Author" class="author-avatar">
+                    <div class="author-info">
+                        <h5>U Aung Kyaw</h5>
+                        <p>Owner, Golden Threads Boutique, Yangon</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card reveal">
+                <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                <div class="stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">"I've been sourcing from Cherry Store for 3 years now. Their Indian grocery selection is unmatched, and my customers love the authentic products. The wholesale dashboard makes ordering so easy."</p>
+                <div class="testimonial-author">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face" alt="Author" class="author-avatar">
+                    <div class="author-info">
+                        <h5>Daw Mya Mya</h5>
+                        <p>Owner, Spice World Market, Mandalay</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card reveal">
+                <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                <div class="stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                </div>
+                <p class="testimonial-text">"The bridal collection from Cherry Store is simply stunning. My clients are always impressed with the quality and designs. Their MOQ is reasonable and the support team is incredibly helpful."</p>
+                <div class="testimonial-author">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face" alt="Author" class="author-avatar">
+                    <div class="author-info">
+                        <h5>Ko Min Thu</h5>
+                        <p>Director, Royal Wedding Planners, Naypyidaw</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="gallery" id="collections">
+        <div class="section-header reveal" style="padding-top: 4rem;">
+            <span class="section-label">Lookbook</span>
+            <h2 class="section-title">Our Collection Gallery</h2>
+            <p class="section-subtitle">A glimpse into our premium collections</p>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item tall reveal">
+                <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=400&h=800&fit=crop" alt="Gallery">
+                <div class="gallery-overlay">
+                    <h4>Silk Collection</h4>
+                    <p>Handwoven masterpieces</p>
+                </div>
+            </div>
+            <div class="gallery-item reveal">
+                <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400&h=300&fit=crop" alt="Gallery">
+                <div class="gallery-overlay">
+                    <h4>Cotton Comfort</h4>
+                    <p>Everyday elegance</p>
+                </div>
+            </div>
+            <div class="gallery-item reveal">
+                <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=400&h=300&fit=crop" alt="Gallery">
+                <div class="gallery-overlay">
+                    <h4>Accessories</h4>
+                    <p>Complete your look</p>
+                </div>
+            </div>
+            <div class="gallery-item wide reveal">
+                <img src="https://images.unsplash.com/photo-1583391733952-0c5ebf1a5df2?w=800&h=300&fit=crop" alt="Gallery">
+                <div class="gallery-overlay">
+                    <h4>Bridal Dreams</h4>
+                    <p>Make your day special</p>
+                </div>
+            </div>
+            <div class="gallery-item reveal">
+                <img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=300&fit=crop" alt="Gallery">
+                <div class="gallery-overlay">
+                    <h4>Traditional</h4>
+                    <p>Heritage designs</p>
+                </div>
+            </div>
+            <div class="gallery-item tall reveal">
+                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=400&h=800&fit=crop" alt="Gallery">
+                <div class="gallery-overlay">
+                    <h4>Modern Fusion</h4>
+                    <p>Contemporary styles</p>
+                </div>
+            </div>
+            <div class="gallery-item reveal">
+                <img src="https://images.unsplash.com/photo-1606787366850-de6330128bfc?w=400&h=300&fit=crop" alt="Gallery">
+                <div class="gallery-overlay">
+                    <h4>Grocery</h4>
+                    <p>Authentic Indian flavors</p>
+                </div>
+            </div>
+            <div class="gallery-item reveal">
+                <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=400&h=300&fit=crop" alt="Gallery">
+                <div class="gallery-overlay">
+                    <h4>Jewelry</h4>
+                    <p>Sparkle and shine</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="about" id="about">
+        <div class="about-container">
+            <div class="about-images reveal">
+                <div class="about-img-main">
+                    <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=500&h=700&fit=crop" alt="About">
+                </div>
+                <div class="about-img-sub">
+                    <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=300&h=300&fit=crop" alt="About">
+                </div>
+                <div class="about-img-sub">
+                    <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=300&h=300&fit=crop" alt="About">
+                </div>
+                <div class="experience-badge">
+                    <div class="years">15+</div>
+                    <div class="text">Years of<br>Excellence</div>
+                </div>
+            </div>
+            <div class="about-content reveal">
+                <span class="section-label">About Us</span>
+                <h2>The Cherry Store Story</h2>
+                <p>Founded in 2009, Cherry Store began as a small family business with a vision to bring the finest Indian fashion to Myanmar. Today, we are one of the leading wholesale suppliers of sarees, kurtis, and Indian grocery products.</p>
+                <p>Our mission is to empower local retailers with high-quality, authentic Indian products at competitive wholesale prices. We believe in building lasting partnerships based on trust, quality, and mutual growth.</p>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-year">2009</div>
+                        <div class="timeline-text">Founded as a small saree shop in Yangon</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2014</div>
+                        <div class="timeline-text">Expanded to wholesale distribution</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2018</div>
+                        <div class="timeline-text">Launched online platform for B2B orders</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2022</div>
+                        <div class="timeline-text">Reached 500+ retail partners across Myanmar</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2024</div>
+                        <div class="timeline-text">Expanded to international shipping</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+        <div class="section-header reveal">
+            <span class="section-label">Get In Touch</span>
+            <h2 class="section-title">Contact Us</h2>
+            <p class="section-subtitle">We'd love to hear from you. Reach out for orders, inquiries, or partnership opportunities.</p>
+        </div>
+        <div class="contact-container">
+            <div class="contact-info reveal">
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div>
+                            <h4>Store Address</h4>
+                            <p>123 Bogyoke Aung San Road<br>Yangon, Myanmar</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>+95 9 123 456 789<br>+95 9 987 654 321</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
+                        <div>
+                            <h4>WhatsApp</h4>
+                            <p>+95 9 123 456 789<br>Available 24/7</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                        <div>
+                            <h4>Email</h4>
+                            <p>info@cherrystore.com<br>orders@cherrystore.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-clock"></i></div>
+                        <div>
+                            <h4>Business Hours</h4>
+                            <p>Mon - Sat: 9:00 AM - 8:00 PM<br>Sun: 10:00 AM - 6:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="map-container">
+                    <div class="map-placeholder">
+                        <i class="fas fa-map-marked-alt" style="font-size: 3rem; margin-bottom: 1rem; color: var(--cherry-red);"></i>
+                        <p>Google Maps Integration</p>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-viber"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="contact-form-wrapper reveal">
+                <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; font-family: 'Playfair Display', serif;">Send us a Message</h3>
+                <p style="color: var(--text-gray); margin-bottom: 2rem; font-size: 0.95rem;">Fill out the form and we'll get back to you shortly</p>
+                <form onsubmit="event.preventDefault(); showToast('Message sent successfully!');">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Your Name *</label>
+                            <input type="text" placeholder="John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number *</label>
+                            <input type="tel" placeholder="+95..." required>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>WhatsApp</label>
+                            <input type="tel" placeholder="+95...">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" placeholder="your@email.com">
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Business Type</label>
+                            <select>
+                                <option>Select type</option>
+                                <option>Retail Shop</option>
+                                <option>Online Store</option>
+                                <option>Individual</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Country</label>
+                            <select>
+                                <option>Myanmar</option>
+                                <option>Thailand</option>
+                                <option>Bangladesh</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group full">
+                        <label>Message *</label>
+                        <textarea placeholder="How can we help you?" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Dashboard Preview -->
+    <section style="background: var(--off-white); padding: 4rem 0;">
+        <div class="section-header reveal">
+            <span class="section-label">Admin Panel</span>
+            <h2 class="section-title">Wholesale Dashboard Preview</h2>
+            <p class="section-subtitle">Powerful tools to manage your wholesale business</p>
+        </div>
+        <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+            <div class="admin-preview reveal">
+                <div class="admin-header">
+                    <h4><i class="fas fa-chart-line"></i> Cherry Store Admin Dashboard</h4>
+                    <span style="font-size: 0.9rem; opacity: 0.8;">Live Analytics</span>
+                </div>
+                <div class="admin-stats">
+                    <div class="admin-stat">
+                        <h5>₹12.5L</h5>
+                        <p>Monthly Revenue</p>
+                    </div>
+                    <div class="admin-stat">
+                        <h5>1,240</h5>
+                        <p>Total Orders</p>
+                    </div>
+                    <div class="admin-stat">
+                        <h5>856</h5>
+                        <p>Active Products</p>
+                    </div>
+                    <div class="admin-stat">
+                        <h5>500+</h5>
+                        <p>Retail Partners</p>
+                    </div>
+                </div>
+                <div class="admin-chart">
+                    <div class="chart-bar" style="height: 60%;"></div>
+                    <div class="chart-bar" style="height: 80%;"></div>
+                    <div class="chart-bar" style="height: 45%;"></div>
+                    <div class="chart-bar" style="height: 90%;"></div>
+                    <div class="chart-bar" style="height: 70%;"></div>
+                    <div class="chart-bar" style="height: 85%;"></div>
+                    <div class="chart-bar" style="height: 55%;"></div>
+                    <div class="chart-bar" style="height: 95%;"></div>
+                    <div class="chart-bar" style="height: 75%;"></div>
+                    <div class="chart-bar" style="height: 88%;"></div>
+                    <div class="chart-bar" style="height: 65%;"></div>
+                    <div class="chart-bar" style="height: 92%;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h3><i class="fas fa-gem" style="color: var(--cherry-red); margin-right: 0.5rem;"></i>Cherry Store</h3>
+                <p>Premium Wholesale Sarees & Indian Fashion. Direct import from India to Myanmar. Quality guaranteed, prices unmatched.</p>
+                <div class="social-links" style="margin-top: 0;">
+                    <a href="#" class="social-link" style="background: rgba(255,255,255,0.1); border: none; color: white;"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link" style="background: rgba(255,255,255,0.1); border: none; color: white;"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link" style="background: rgba(255,255,255,0.1); border: none; color: white;"><i class="fab fa-telegram"></i></a>
+                    <a href="#" class="social-link" style="background: rgba(255,255,255,0.1); border: none; color: white;"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div>
+                <h4 class="footer-title">Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="#home"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i> Home</a></li>
+                    <li><a href="#sarees"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i> Sarees</a></li>
+                    <li><a href="#collections"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i> Collections</a></li>
+                    <li><a href="#wholesale"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i> Wholesale</a></li>
+                    <li><a href="#about"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i> About Us</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="footer-title">Customer Support</h4>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i> Help Center</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i> Order Tracking</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i> Shipping Info</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i> Returns</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i> Size Guide</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="footer-title">Policies</h4>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i> Terms of Service</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i> Privacy Policy</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i> Wholesale Terms</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i> Return Policy</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i> Cookie Policy</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="footer-title">Newsletter</h4>
+                <p style="color: rgba(255,255,255,0.6); font-size: 0.9rem; margin-bottom: 1rem;">Subscribe for latest collections and wholesale offers</p>
+                <form class="newsletter-form" onsubmit="event.preventDefault(); showToast('Subscribed successfully!');">
+                    <input type="email" placeholder="Your email address" required>
+                    <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                </form>
+                <div style="margin-top: 1.5rem;">
+                    <p style="color: rgba(255,255,255,0.5); font-size: 0.85rem; margin-bottom: 0.5rem;">We Accept:</p>
+                    <div class="payment-icons">
+                        <i class="fab fa-cc-visa"></i>
+                        <i class="fab fa-cc-mastercard"></i>
+                        <i class="fab fa-cc-paypal"></i>
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Cherry Store. All rights reserved. Made with <i class="fas fa-heart" style="color: var(--cherry-red);"></i> in Myanmar</p>
+            <div style="display: flex; gap: 2rem; color: rgba(255,255,255,0.5); font-size: 0.85rem;">
+                <a href="#" style="color: inherit; text-decoration: none;">Terms</a>
+                <a href="#" style="color: inherit; text-decoration: none;">Privacy</a>
+                <a href="#" style="color: inherit; text-decoration: none;">Cookies</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/959123456789" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- JavaScript -->
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Reveal on scroll
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Mobile menu
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('active');
+            document.getElementById('mobileOverlay').classList.toggle('active');
+        }
+
+        // Search overlay
+        function toggleSearch() {
+            document.getElementById('searchOverlay').classList.toggle('active');
+            if (document.getElementById('searchOverlay').classList.contains('active')) {
+                setTimeout(() => document.getElementById('searchInput').focus(), 100);
+            }
+        }
+
+        function handleSearch(e) {
+            if (e.key === 'Enter') {
+                showToast('Searching for: ' + e.target.value);
+                toggleSearch();
+            }
+        }
+
+        // Cart sidebar
+        function toggleCart() {
+            document.getElementById('cartSidebar').classList.toggle('active');
+            document.getElementById('cartOverlay').classList.toggle('active');
+        }
+
+        function updateQty(btn, change) {
+            const qtySpan = btn.parentElement.querySelector('span');
+            let qty = parseInt(qtySpan.textContent) + change;
+            if (qty < 1) qty = 1;
+            qtySpan.textContent = qty;
+        }
+
+        // Auth modal
+        function openAuthModal() {
+            document.getElementById('authModal').classList.add('active');
+        }
+
+        function closeAuthModal() {
+            document.getElementById('authModal').classList.remove('active');
+        }
+
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById('loginTab').style.display = tab === 'login' ? 'block' : 'none';
+            document.getElementById('registerTab').style.display = tab === 'register' ? 'block' : 'none';
+            document.getElementById('otpTab').style.display = 'none';
+        }
+
+        function showOTP() {
+            document.getElementById('loginTab').style.display = 'none';
+            document.getElementById('otpTab').style.display = 'block';
+        }
+
+        function moveOTP(input, index) {
+            if (input.value && index < 5) {
+                input.parentElement.children[index + 1].focus();
+            }
+        }
+
+        function verifyOTP() {
+            showToast('OTP Verified successfully!');
+            closeAuthModal();
+        }
+
+        // Product modal
+        function openProductModal() {
+            document.getElementById('productModal').classList.add('active');
+        }
+
+        function closeProductModal() {
+            document.getElementById('productModal').classList.remove('active');
+        }
+
+        function changeImage(thumb, index) {
+            document.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
+            thumb.classList.add('active');
+            const images = [
+                'https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=600&h=800&fit=crop',
+                'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=600&h=800&fit=crop',
+                'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=600&h=800&fit=crop',
+                'https://images.unsplash.com/photo-1583391733952-0c5ebf1a5df2?w=600&h=800&fit=crop'
+            ];
+            document.getElementById('mainProductImage').src = images[index];
+        }
+
+        function adjustQty(change) {
+            const input = document.getElementById('detailQty');
+            let val = parseInt(input.value) + change;
+            if (val < 10) val = 10;
+            input.value = val;
+        }
+
+        // Language switcher
+        function toggleLang() {
+            document.getElementById('langDropdown').classList.toggle('active');
+        }
+
+        function selectLang(lang) {
+            const names = { en: 'English', hi: 'हिंदी', my: 'မြန်မာ' };
+            showToast('Language changed to ' + names[lang]);
+            document.getElementById('langDropdown').classList.remove('active');
+        }
+
+        // Toast notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMessage').textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // Add to cart
+        let cartCount = 3;
+        function addToCart() {
+            cartCount++;
+            document.getElementById('cartCount').textContent = cartCount;
+            showToast('Item added to cart!');
+        }
+
+        // Filter tags
+        document.querySelectorAll('.filter-tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                document.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Close modals on overlay click
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.classList.remove('active');
+                }
+            });
+        });
+
+        // GSAP Animations
+        if (typeof gsap !== 'undefined') {
+            gsap.registerPlugin(ScrollTrigger);
+
+            gsap.from('.hero-badge', { opacity: 0, y: 20, duration: 0.8, delay: 0.3 });
+            gsap.from('.hero h1', { opacity: 0, y: 30, duration: 1, delay: 0.5 });
+            gsap.from('.hero-subtitle', { opacity: 0, y: 20, duration: 0.8, delay: 0.7 });
+            gsap.from('.hero-buttons', { opacity: 0, y: 20, duration: 0.8, delay: 0.9 });
+            gsap.from('.hero-stats', { opacity: 0, y: 20, duration: 0.8, delay: 1.1 });
+
+            gsap.from('.hero-img', {
+                opacity: 0, y: 50, duration: 1, stagger: 0.2, delay: 0.5
+            });
+        }
+    </script>
+</body>
+</html>

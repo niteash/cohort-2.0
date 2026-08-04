@@ -1,0 +1,10 @@
+Four types - 
+
+Authentication - identifying
+
+Authorization - user access 
+
+Verification - checking whether data is correct or not
+
+Validation  - format of data 
+
