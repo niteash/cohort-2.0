@@ -1,0 +1,16 @@
+==> Authentication
+    ==> Register user (1. save the user data || 2. give token to user)
+    ==> Login
+    ==> Logout (token blacklisting)
+    ==> [OTP based generation]
+
+==> post
+    ==> create (caption,img url,userId,createdAt)
+    ==> can see the feed
+    ==> like posts (collection types)
+    ==> save post
+
+==> users
+    ==> followers
+    ==> following
+
