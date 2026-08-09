@@ -9,22 +9,6 @@ const Register = () => {
 
   async function handleFormSubmit(e) {
     e.preventDefault();
-
-    axios
-      .post(
-        "http://localhost:3000/api/auth/register",
-        {
-          username,
-          email,
-          password,
-        },
-        {
-          withCredentials: true,
-        },
-      )
-      .then((response) => {
-        console.log("User registered successfully:", response.data);
-      });
   }
   return (
     <>
